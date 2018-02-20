@@ -1,0 +1,7 @@
+C:\Users\Hacker\source\repos\University\MBKS\Hacker_Mirzabaeva_lab1\Hacker_Mirzabaeva_lab1\bin\Debug\Hacker_Mirzabaeva_lab1.exe.config
+C:\Users\Hacker\source\repos\University\MBKS\Hacker_Mirzabaeva_lab1\Hacker_Mirzabaeva_lab1\bin\Debug\Hacker_Mirzabaeva_lab1.exe
+C:\Users\Hacker\source\repos\University\MBKS\Hacker_Mirzabaeva_lab1\Hacker_Mirzabaeva_lab1\bin\Debug\Hacker_Mirzabaeva_lab1.pdb
+C:\Users\Hacker\source\repos\University\MBKS\Hacker_Mirzabaeva_lab1\Hacker_Mirzabaeva_lab1\obj\Debug\Hacker_Mirzabaeva_lab1.csproj.CoreCompileInputs.cache
+C:\Users\Hacker\source\repos\University\MBKS\Hacker_Mirzabaeva_lab1\Hacker_Mirzabaeva_lab1\obj\Debug\Hacker_Mirzabaeva_lab1.exe
+C:\Users\Hacker\source\repos\University\MBKS\Hacker_Mirzabaeva_lab1\Hacker_Mirzabaeva_lab1\obj\Debug\Hacker_Mirzabaeva_lab1.pdb
+C:\Users\Hacker\source\repos\University\MBKS\Hacker_Mirzabaeva_lab1\Hacker_Mirzabaeva_lab1\obj\Debug\Hacker_Mirzabaeva_lab1.csprojResolveAssemblyReference.cache

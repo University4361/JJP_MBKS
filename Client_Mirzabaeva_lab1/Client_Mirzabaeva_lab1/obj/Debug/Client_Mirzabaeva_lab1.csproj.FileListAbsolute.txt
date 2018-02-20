@@ -1,0 +1,15 @@
+C:\Users\Lavrov\source\repos\University\MBKS\Client_Mirzabaeva_lab1\Client_Mirzabaeva_lab1\obj\Debug\MainWindow.g.cs
+C:\Users\Lavrov\source\repos\University\MBKS\Client_Mirzabaeva_lab1\Client_Mirzabaeva_lab1\obj\Debug\App.g.cs
+C:\Users\Lavrov\source\repos\University\MBKS\Client_Mirzabaeva_lab1\Client_Mirzabaeva_lab1\obj\Debug\Client_Mirzabaeva_lab1_MarkupCompile.cache
+C:\Users\Lavrov\source\repos\University\MBKS\Client_Mirzabaeva_lab1\Client_Mirzabaeva_lab1\obj\Debug\Client_Mirzabaeva_lab1_MarkupCompile.lref
+C:\Users\Lavrov\source\repos\University\MBKS\Client_Mirzabaeva_lab1\Client_Mirzabaeva_lab1\bin\Debug\Client_Mirzabaeva_lab1.exe.config
+C:\Users\Lavrov\source\repos\University\MBKS\Client_Mirzabaeva_lab1\Client_Mirzabaeva_lab1\bin\Debug\Client_Mirzabaeva_lab1.exe
+C:\Users\Lavrov\source\repos\University\MBKS\Client_Mirzabaeva_lab1\Client_Mirzabaeva_lab1\bin\Debug\Client_Mirzabaeva_lab1.pdb
+C:\Users\Lavrov\source\repos\University\MBKS\Client_Mirzabaeva_lab1\Client_Mirzabaeva_lab1\obj\Debug\MainWindow.baml
+C:\Users\Lavrov\source\repos\University\MBKS\Client_Mirzabaeva_lab1\Client_Mirzabaeva_lab1\obj\Debug\Client_Mirzabaeva_lab1.g.resources
+C:\Users\Lavrov\source\repos\University\MBKS\Client_Mirzabaeva_lab1\Client_Mirzabaeva_lab1\obj\Debug\Client_Mirzabaeva_lab1.Properties.Resources.resources
+C:\Users\Lavrov\source\repos\University\MBKS\Client_Mirzabaeva_lab1\Client_Mirzabaeva_lab1\obj\Debug\Client_Mirzabaeva_lab1.csproj.GenerateResource.Cache
+C:\Users\Lavrov\source\repos\University\MBKS\Client_Mirzabaeva_lab1\Client_Mirzabaeva_lab1\obj\Debug\Client_Mirzabaeva_lab1.csproj.CoreCompileInputs.cache
+C:\Users\Lavrov\source\repos\University\MBKS\Client_Mirzabaeva_lab1\Client_Mirzabaeva_lab1\obj\Debug\Client_Mirzabaeva_lab1.exe
+C:\Users\Lavrov\source\repos\University\MBKS\Client_Mirzabaeva_lab1\Client_Mirzabaeva_lab1\obj\Debug\Client_Mirzabaeva_lab1.pdb
+C:\Users\Lavrov\source\repos\University\MBKS\Client_Mirzabaeva_lab1\Client_Mirzabaeva_lab1\obj\Debug\Client_Mirzabaeva_lab1.csprojResolveAssemblyReference.cache
