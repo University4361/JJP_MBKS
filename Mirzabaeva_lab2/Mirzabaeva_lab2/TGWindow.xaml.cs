@@ -76,6 +76,18 @@ namespace Mirzabaeva_lab2
                 Label label = stack.Children.OfType<Label>().FirstOrDefault();
 
                 check.IsEnabled = user.AccessDictionary[(char)label.Content] == 1;
+
+                check.IsChecked = false;
+            }
+
+            foreach (RadioButton radio in ToSP.Children.OfType<RadioButton>())
+            {
+                if (radio.Content == user.Name)
+                    radio.IsEnabled = false;
+                else
+                    radio.IsEnabled = true;
+
+                radio.IsChecked = false;   
             }
         }
 
@@ -176,6 +188,8 @@ namespace Mirzabaeva_lab2
                 Label label = stack.Children.OfType<Label>().FirstOrDefault();
 
                 check.IsEnabled = user.AccessDictionary[(char)label.Content] == 1;
+
+                check.IsChecked = false;
             }
         }
 
@@ -280,13 +294,45 @@ namespace Mirzabaeva_lab2
 
                 Label label = stack.Children.OfType<Label>().FirstOrDefault();
 
-                if (check.IsChecked ?? false)
+                if (check?.IsChecked ?? false)
                     objects += label.Content;
             }
 
             UsersWorker.CreateSubject(NameTB.Text, objects);
 
             Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            TextBox TB = CreateStack.Children.OfType<TextBox>().FirstOrDefault();
+            CreateStack.Visibility = Visibility.Visible;
+            TB.Focus();
+            TB.KeyUp += TB_KeyUp;
+        }
+
+        private void TB_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox TB = sender as TextBox;
+
+            if (e.Key != Key.Enter || string.IsNullOrEmpty(TB.Text) || UsersWorker.AllAccessObjects.Contains(TB.Text)) return;
+
+            UsersWorker.AllAccessObjects += TB.Text;
+
+            var objects = UsersWorker.AllAccessObjects.ToList();
+            UsersWorker.AllAccessObjects = string.Empty;
+            objects.Sort();
+            foreach (var obj in objects)
+                UsersWorker.AllAccessObjects += obj;
+
+            CreateRulesDP.Children.Clear();
+            CreateRulesDP.Children.Add(CreateStack);
+
+            InitializeCreateObjects();
+
+            e.Handled = true;
+            CreateStack.Visibility = Visibility.Collapsed;
+            TB.KeyUp -= TB_KeyUp;
         }
     }
 }

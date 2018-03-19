@@ -8,7 +8,7 @@ namespace Mirzabaeva_lab2
     public static class UsersWorker
     {
         public static string CurrentAccessObjects { get; set; }
-        public const string AllAccessObjects = "abcdefghijklmnopqrstuvwxyz";
+        public static string AllAccessObjects = "abcdefghijklmnopqrstuvwxyz";
 
         public static Dictionary<string, AppUser> AccessUsers { get; set; }
 
@@ -59,10 +59,10 @@ namespace Mirzabaeva_lab2
                 accessString += newObjects.Contains(obj.ToString()) ? "1" : "0";
             }
 
-
-
             foreach (var user in AccessUsers.Values)
             {
+                user.Template = objects;
+
                 var sortedKeys = user.AccessDictionary.Keys.ToList();
                 sortedKeys.Sort();
 

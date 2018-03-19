@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace Mirzabaeva_lab2
 {
@@ -11,6 +13,8 @@ namespace Mirzabaeva_lab2
     public partial class MainWindow : Window
     {
         private AppUser _currentAccessUser;
+        private string _currentUsersPath = Path.Combine(Directory.GetCurrentDirectory(), "data.txt");
+        private string _currentTemplatePath = Path.Combine(Directory.GetCurrentDirectory(), "template.txt");
         private const string _initialTemplate = "abcdefg";
         private const int _initialSubjectsCount = 4;
         private Dictionary<string, DockPanel> _panels = new Dictionary<string, DockPanel>();
@@ -20,23 +24,47 @@ namespace Mirzabaeva_lab2
         {
             InitializeComponent();
 
+            Closed += MainWindow_Closed;
+
             InitialSetup();
             SetupMainStack();
             SetupEvents();
         }
 
+        private void MainWindow_Closed(object sender, System.EventArgs e)
+        {
+            var users = JsonConvert.SerializeObject(UsersWorker.AccessUsers);
+            File.WriteAllText(_currentTemplatePath, UsersWorker.AllAccessObjects);
+            File.WriteAllText(_currentUsersPath, users);
+        }
+
         private void InitialSetup()
         {
-            Dictionary<string, AppUser> users = new Dictionary<string, AppUser>();
+            string usersString = string.Empty;
 
-            for (int i = 1; i <= _initialSubjectsCount; i++)
+            if (File.Exists(_currentUsersPath))
+                usersString = File.ReadAllText(_currentUsersPath);
+
+            if (File.Exists(_currentTemplatePath))
+                UsersWorker.AllAccessObjects = File.ReadAllText(_currentTemplatePath);
+
+            Dictionary<string, AppUser> users = JsonConvert.DeserializeObject<Dictionary<string, AppUser>>(usersString);
+
+            if (users == null)
             {
-                string name = $"User {i}";
-                AppUser newUser = new AppUser(name, string.Empty, _initialTemplate);
-                users.Add(name, newUser);
-                UsersWorker.CurrentAccessObjects = _initialTemplate;
-            }
+                users = new Dictionary<string, AppUser>();
 
+                for (int i = 1; i <= _initialSubjectsCount; i++)
+                {
+                    string name = $"User {i}";
+                    AppUser newUser = new AppUser(name, string.Empty, _initialTemplate);
+                    users.Add(name, newUser);
+                    UsersWorker.CurrentAccessObjects = _initialTemplate;
+                }
+            }
+            else
+                UsersWorker.CurrentAccessObjects = users.FirstOrDefault().Value.Template;
+            
             UsersWorker.AccessUsers = users;
         }
 
@@ -170,7 +198,6 @@ namespace Mirzabaeva_lab2
             SetupMainStack();
             OutputTB.Text = string.Empty;
             _currentAccessUser = null;
-            SizeToContent = SizeToContent.WidthAndHeight;
             UpdateLayout();
         }
 
