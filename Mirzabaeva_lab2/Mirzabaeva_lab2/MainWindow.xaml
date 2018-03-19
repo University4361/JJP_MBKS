@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Lab 3" Height="347.312" Width="387.312"
         SizeToContent="WidthAndHeight">
-    <Grid Name="MainGrid" Background="LightGray">
+    <Grid Name="MainGrid" Background="White">
         <GroupBox Header="Users" Margin="10,125,10,10" Grid.ColumnSpan="2" >
             <Grid>
                 <Button Name="TGButton" Content="TGButton" HorizontalAlignment="Left" Width="75" Margin="10,0,0,10" Grid.Row="1" Click="TGButton_Click" Height="20" VerticalAlignment="Bottom"/>

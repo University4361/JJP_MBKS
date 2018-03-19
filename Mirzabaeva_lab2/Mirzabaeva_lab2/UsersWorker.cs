@@ -108,13 +108,14 @@ namespace Mirzabaeva_lab2
         {
             panel = new DockPanel
             {
-                LastChildFill = true,
+                LastChildFill = false,
                 Margin = new System.Windows.Thickness { Bottom = 5, Top = 5 }
             };
 
-
             radio = new RadioButton()
             {
+                MaxWidth = 160,
+                MinWidth = 160,
                 Content = myUser.Name,
                 GroupName = groupName,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
