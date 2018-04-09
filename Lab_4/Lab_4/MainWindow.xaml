@@ -1,0 +1,38 @@
+﻿<Window x:Class="Lab_4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab_4"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <ListView ItemsSource="{Binding ListOfDirectories}"
+          SelectedItem="{Binding Path=SelectedDirectory}" Name="MainList">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="140" Header="Path"
+         DisplayMemberBinding="{Binding Path}"  />
+                    <GridViewColumn Width="140" Header="Access"  
+         DisplayMemberBinding="{Binding AccessRuleName}" />
+                    <GridViewColumn Width="140" Header="Files count"
+         DisplayMemberBinding="{Binding FilesCount}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!--<GroupBox Margin="10,10,10,40" Header="Directory flow">
+            <ScrollViewer>
+                <Grid>
+                    <StackPanel x:Name="CreateDirectoriesSP"  Orientation="Vertical" Margin="16,16,16,0" VerticalAlignment="Top">
+
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+
+        </GroupBox>
+
+        <Button Content="Create" Height="25" DockPanel.Dock="Bottom" Name="CreateButton" Click="CreateButton_Click" Margin="0,0,10,10" HorizontalAlignment="Right" Width="80" VerticalAlignment="Bottom" />-->
+
+    </Grid>
+</Window>
