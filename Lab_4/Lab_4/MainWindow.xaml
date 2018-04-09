@@ -4,35 +4,48 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab_4"
+        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Mandatory access control" Height="390" Width="750.513"
+        Background="LightGray">
     <Grid>
-        <ListView ItemsSource="{Binding ListOfDirectories}"
-          SelectedItem="{Binding Path=SelectedDirectory}" Name="MainList">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Width="140" Header="Path"
-         DisplayMemberBinding="{Binding Path}"  />
-                    <GridViewColumn Width="140" Header="Access"  
-         DisplayMemberBinding="{Binding AccessRuleName}" />
-                    <GridViewColumn Width="140" Header="Files count"
-         DisplayMemberBinding="{Binding FilesCount}" />
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <DataGrid Name="MainDataGrid" ItemsSource="{Binding Source=ListOfDirectories}"  AutoGenerateColumns="False" Margin="0,0,197,0">
 
-        <!--<GroupBox Margin="10,10,10,40" Header="Directory flow">
-            <ScrollViewer>
-                <Grid>
-                    <StackPanel x:Name="CreateDirectoriesSP"  Orientation="Vertical" Margin="16,16,16,0" VerticalAlignment="Top">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="1*" Header="Id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Width="3*"  Header="Path" Binding="{Binding Path}"/>
+                <DataGridComboBoxColumn Width="2*"  x:Name="CBItem" Header="Access" SelectedItemBinding="{Binding Path=AccessRule}"  SelectedValuePath="AccessID" DisplayMemberPath="AccessName" ItemsSource="{Binding Source=Rules}"/>
+                <DataGridTextColumn Width="3*"  Header="Files count" Binding="{Binding FilesCount}"/>
+                <DataGridTextColumn Width="3*"  Header="Comment" Binding="{Binding Comment}"/>
+            </DataGrid.Columns>
 
-                    </StackPanel>
-                </Grid>
-            </ScrollViewer>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="0" Background="BlanchedAlmond" Padding="10">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="12" Text="Path: " VerticalAlignment="Center" />
+                                <TextBlock FontSize="16" Foreground="MidnightBlue" Text="{Binding Path}" VerticalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="12" Text="Comment: " VerticalAlignment="Center" />
+                                <TextBlock FontSize="16" Foreground="MidnightBlue" Text="{Binding Comment}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
 
+        <GroupBox Header="Actions" Height="100" Margin="0,10,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="182">
+            <Grid >
+                <Button  Content="Add"  Click="AddClick" Margin="10,0,0,10" HorizontalAlignment="Left" Width="60" Height="25" VerticalAlignment="Bottom" />
+                <Button  Content="Delete"  Click="DeleteClick" Margin="75,0,0,10" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="60" />
+                <Button  Content="Copy to"  Click="CopyClick" Margin="10,0,0,40" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="80" />
+                <TextBox x:Name="CopyToIdTB" Margin="95,0,0,40" HorizontalAlignment="Left" Width="65" Height="25" VerticalAlignment="Bottom"/>
+            </Grid>
         </GroupBox>
-
-        <Button Content="Create" Height="25" DockPanel.Dock="Bottom" Name="CreateButton" Click="CreateButton_Click" Margin="0,0,10,10" HorizontalAlignment="Right" Width="80" VerticalAlignment="Bottom" />-->
-
+        <Label Content="{Binding ElementName=MainDataGrid, Path=Items.Count}" ContentStringFormat='Amount of directories: {0}' Margin="546,0,0,10" Height="26" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="142"/>
     </Grid>
 </Window>

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,40 +11,32 @@ namespace Lab_4
 {
     public static class DirectoryHelper
     {
-        public static Dictionary<string, DirectoryObject> CurrentDirectories = new Dictionary<string, DirectoryObject>(); 
+        static int CurrentId;
 
-        public static void SetupDock(string path, out DockPanel panel, out TextBox textBox)
+        public static string CurrentUsersPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "data.txt");
+
+
+        static DirectoryHelper()
         {
-            panel = new DockPanel
-            {
-                LastChildFill = true,
-                Margin = new System.Windows.Thickness { Bottom = 5, Top = 5 }
-            };
+            SetInitialId();
+        }
 
-            Button changeRulesButton = new Button
-            {
-                Content = "Change rules",
-                Margin = new System.Windows.Thickness { Left = 8, Right = 4 }
-            };
+        private static void SetInitialId()
+        {
+            string dirsString = string.Empty;
 
-            Button copyFilesButton = new Button
-            {
-                Content = "Copy files to...",
-                Margin = new System.Windows.Thickness { Left = 4, Right = 8 }
-            };
+            if (File.Exists(CurrentUsersPath))
+                dirsString = File.ReadAllText(CurrentUsersPath);
 
-            panel.Children.Add(changeRulesButton);
-            panel.Children.Add(copyFilesButton);
+            List<DirectoryObject> dirs = JsonConvert.DeserializeObject<List<DirectoryObject>>(dirsString);
 
+            if (dirs != null && dirs.Any())
+                CurrentId = dirs.Select(dir => dir.Id).Max();
+        }
 
-            textBox = new TextBox()
-            {
-                Text = path,
-                VerticalAlignment = System.Windows.VerticalAlignment.Center,
-                Margin = new System.Windows.Thickness { Left = 10, Right = 10 }
-            };
-
-            panel.Children.Add(textBox);
+        public static int GenerateID()
+        {
+            return ++CurrentId;
         }
     }
 }
