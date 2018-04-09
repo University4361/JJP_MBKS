@@ -46,6 +46,6 @@
                 <TextBox x:Name="CopyToIdTB" Margin="95,0,0,40" HorizontalAlignment="Left" Width="65" Height="25" VerticalAlignment="Bottom"/>
             </Grid>
         </GroupBox>
-        <Label Content="{Binding ElementName=MainDataGrid, Path=Items.Count}" ContentStringFormat='Amount of directories: {0}' Margin="546,0,0,10" Height="26" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="142"/>
+        <Label Content="{Binding ElementName=MainDataGrid, Path=Items.Count}" ContentStringFormat='Amount of directories: {0}' Margin="0,0,55,10" Height="26" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="142"/>
     </Grid>
 </Window>
