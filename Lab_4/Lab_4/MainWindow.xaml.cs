@@ -66,14 +66,6 @@ namespace Lab_4
             {
                 Rules = new ObservableCollection<AccessRule>(rules);
             }
-            else
-                Rules = new ObservableCollection<AccessRule>
-                {
-                    new AccessRule(0, "Default"),
-                    new AccessRule(1, "Non secret"),
-                    new AccessRule(2, "Secret"),
-                    new AccessRule(3, "Top secret"),
-                };
 
             List<DirectoryObject> dirs = JsonConvert.DeserializeObject<List<DirectoryObject>>(dirsString);
 
@@ -96,13 +88,6 @@ namespace Lab_4
 
                 Roles = new ObservableCollection<AccessRole>(roles);
             }
-            else
-                Roles = new ObservableCollection<AccessRole>
-                {
-                    new AccessRole(0, "Default", "0, 1", Rules),
-                    new AccessRole(1, "AsdASD", "1, 2", Rules),
-                    new AccessRole(2, "DSAAZZS", "2, 3", Rules),
-                };
 
             List<MyUser> users = JsonConvert.DeserializeObject<List<MyUser>>(usersString);
 
@@ -113,13 +98,30 @@ namespace Lab_4
 
                 Users = new ObservableCollection<MyUser>(users);
             }
-            else
-                SetUsers();
+
+            MyUser myUser = Users.FirstOrDefault(user => user.UserName == Environment.UserName);
+
+            List<AccessRule> listOfRules = new List<AccessRule>();
+
+            foreach (var myRules in myUser.CurrentRoles.Select(role => role.SelectedRules).ToList())
+                listOfRules.AddRange(myRules);
+
+            List<DirectoryObject> objects = new List<DirectoryObject>();
+
+            foreach (var dir in ListOfDirectories)
+            {
+                if (listOfRules.Select(rule => rule.AccessID).Contains(dir.AccessRule.AccessID))
+                {
+                    objects.Add(dir);
+                }
+            }
+
+            ListOfDirectories = new ObservableCollection<DirectoryObject>(objects);
+
+            UsernameLabel.Content = "Username: " + myUser.UserName;
+            AccessLabel.Content = "Roles: " + myUser.CurrentRolesNames;
 
             MainDataGrid.ItemsSource = ListOfDirectories;
-            RulesDataGrid.ItemsSource = Rules;
-            RolesDataGrid.ItemsSource = Roles;
-            UsersDataGrid.ItemsSource = Users;
 
             CBItem.ItemsSource = Rules;
         }
@@ -137,66 +139,6 @@ namespace Lab_4
 
             var rules = JsonConvert.SerializeObject(Rules.ToList());
             File.WriteAllText(DirectoryHelper.CurrentRulesPath, rules);
-        }
-
-        private void AddClick(object sender, RoutedEventArgs e)
-        {
-            string resultPath = string.Empty;
-
-            using (var dialog = new FolderBrowserDialog())
-            {
-                DialogResult result = dialog.ShowDialog();
-
-                if (result == System.Windows.Forms.DialogResult.OK)
-                    resultPath = dialog.SelectedPath;
-                else
-                    return;
-            }
-
-            if (ListOfDirectories.FirstOrDefault(dir => dir.Path == resultPath) != null)
-                return;
-
-            int count = Directory.CreateDirectory(resultPath).GetFiles().Length;
-
-            ListOfDirectories.Add(new DirectoryObject(Rules.FirstOrDefault(rule => rule.AccessID == 0), resultPath, count));
-        }
-
-        private void DeleteClick(object sender, RoutedEventArgs e)
-        {
-            if (MainDataGrid.SelectedIndex < 0)
-            {
-                System.Windows.MessageBox.Show("Выберите папку, которую хотите удалить");
-                return;
-            }
-
-            DirectoryObject currentDir = MainDataGrid.SelectedItem as DirectoryObject;
-            currentDir.Dispose();
-
-            ListOfDirectories.Remove(currentDir);
-        }
-
-        private void AddRuleClick(object sender, RoutedEventArgs e)
-        {
-            int id = Rules.Select(rule => rule.AccessID).Max() + 1;
-            Rules.Add(new AccessRule(id, $"New rule {id}"));
-        }
-
-        private void DeleteRuleClick(object sender, RoutedEventArgs e)
-        {
-            AccessRule currentRule = RulesDataGrid.SelectedItem as AccessRule;
-            Rules.Remove(currentRule);
-        }
-
-        private void AddRoleClick(object sender, RoutedEventArgs e)
-        {
-            int id = Roles.Select(rule => rule.RoleID).Max() + 1;
-            Roles.Add(new AccessRole(id, $"New role {id}", "0,1", Rules));
-        }
-
-        private void DeleteRoleClick(object sender, RoutedEventArgs e)
-        {
-            AccessRole currentRole = RolesDataGrid.SelectedItem as AccessRole;
-            Roles.Remove(currentRole);
         }
 
         private void SetUsers()
