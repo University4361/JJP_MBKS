@@ -128,17 +128,6 @@ namespace Lab_4
 
         private void MainWindow_Closed(object sender, EventArgs e)
         {
-            var folders = JsonConvert.SerializeObject(ListOfDirectories.ToList());
-            File.WriteAllText(DirectoryHelper.CurrentFoldersPath, folders);
-
-            var users = JsonConvert.SerializeObject(Users.ToList());
-            File.WriteAllText(DirectoryHelper.CurrentMyUsersPath, users);
-
-            var roles = JsonConvert.SerializeObject(Roles.ToList());
-            File.WriteAllText(DirectoryHelper.CurrentRolesPath, roles);
-
-            var rules = JsonConvert.SerializeObject(Rules.ToList());
-            File.WriteAllText(DirectoryHelper.CurrentRulesPath, rules);
         }
 
         private void SetUsers()
