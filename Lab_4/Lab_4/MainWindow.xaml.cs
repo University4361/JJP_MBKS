@@ -38,8 +38,6 @@ namespace Lab_4
         {
             InitializeComponent();
 
-            Closed += MainWindow_Closed;
-
             string dirsString = string.Empty;
 
             if (File.Exists(DirectoryHelper.CurrentFoldersPath))
@@ -122,12 +120,6 @@ namespace Lab_4
             AccessLabel.Content = "Roles: " + myUser.CurrentRolesNames;
 
             MainDataGrid.ItemsSource = ListOfDirectories;
-
-            CBItem.ItemsSource = Rules;
-        }
-
-        private void MainWindow_Closed(object sender, EventArgs e)
-        {
         }
 
         private void SetUsers()
