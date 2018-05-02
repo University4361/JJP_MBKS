@@ -1,11 +1,7 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace Lab_4
 {
@@ -13,7 +9,10 @@ namespace Lab_4
     {
         static int CurrentId;
 
-        public static string CurrentUsersPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "data.txt");
+        public static string CurrentFoldersPath = Path.Combine("C:\\Users\\Public\\Lavrov", "data.txt");
+        public static string CurrentRolesPath = Path.Combine("C:\\Users\\Public\\Lavrov", "roles.txt");
+        public static string CurrentRulesPath = Path.Combine("C:\\Users\\Public\\Lavrov", "rules.txt");
+        public static string CurrentMyUsersPath = Path.Combine("C:\\Users\\Public\\Lavrov", "users.txt");
 
 
         static DirectoryHelper()
@@ -25,8 +24,8 @@ namespace Lab_4
         {
             string dirsString = string.Empty;
 
-            if (File.Exists(CurrentUsersPath))
-                dirsString = File.ReadAllText(CurrentUsersPath);
+            if (File.Exists(CurrentFoldersPath))
+                dirsString = File.ReadAllText(CurrentFoldersPath);
 
             List<DirectoryObject> dirs = JsonConvert.DeserializeObject<List<DirectoryObject>>(dirsString);
 

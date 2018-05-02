@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Newtonsoft.Json;
+using System.ComponentModel;
 
 namespace Lab_4
 {
@@ -37,6 +38,7 @@ namespace Lab_4
             }
         }
 
+        [JsonConstructor]
         public AccessRule(int id, string name)
         {
             AccessID = id;

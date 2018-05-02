@@ -7,10 +7,19 @@
         xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Mandatory access control" Height="390" Width="750.513"
+        Title="Mandatory access control" Height="548.229" Width="934.37"
         Background="LightGray">
     <Grid>
-        <DataGrid Name="MainDataGrid" ItemsSource="{Binding Source=ListOfDirectories}"  AutoGenerateColumns="False" Margin="0,0,197,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Name="MainDataGrid" ItemsSource="{Binding Source=ListOfDirectories}"  AutoGenerateColumns="False" Margin="10,10,10,56" Grid.RowSpan="3">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Width="1*" Header="Id" Binding="{Binding Id}"/>
@@ -37,15 +46,85 @@
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
         </DataGrid>
+        <Label Content="{Binding ElementName=MainDataGrid, Path=Items.Count}" ContentStringFormat='Amount of directories: {0}' Margin="0,0,10,9" Height="26" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="142" Grid.Row="2"/>
+        <Button  Content="Add"  Click="AddClick" Margin="10,0,0,10" HorizontalAlignment="Left" Width="60" Height="25" VerticalAlignment="Bottom" Grid.Row="2" />
+        <Button  Content="Delete"  Click="DeleteClick" Margin="75,0,0,10" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="60" Grid.Row="2" />
+        <DataGrid Name="UsersDataGrid" ItemsSource="{Binding Source=Users}" AutoGenerateColumns="False" Margin="10,41,10,10" Grid.Column="1" Grid.Row="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="1*" Header="User name" Binding="{Binding UserName}"/>
+                <DataGridTextColumn Width="1*"  Header="Roles" Binding="{Binding CurrentRolesIds}"/>
+            </DataGrid.Columns>
 
-        <GroupBox Header="Actions" Height="100" Margin="0,10,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="182">
-            <Grid >
-                <Button  Content="Add"  Click="AddClick" Margin="10,0,0,10" HorizontalAlignment="Left" Width="60" Height="25" VerticalAlignment="Bottom" />
-                <Button  Content="Delete"  Click="DeleteClick" Margin="75,0,0,10" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="60" />
-                <Button  Content="Copy to"  Click="CopyClick" Margin="10,0,0,40" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="80" />
-                <TextBox x:Name="CopyToIdTB" Margin="95,0,0,40" HorizontalAlignment="Left" Width="65" Height="25" VerticalAlignment="Bottom"/>
-            </Grid>
-        </GroupBox>
-        <Label Content="{Binding ElementName=MainDataGrid, Path=Items.Count}" ContentStringFormat='Amount of directories: {0}' Margin="0,0,55,10" Height="26" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="142"/>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="0" Background="BlanchedAlmond" Padding="10">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="12" Text="Role name: " VerticalAlignment="Center" />
+                                <TextBlock FontSize="16" Foreground="MidnightBlue" Text="{Binding UserName}" VerticalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="12" Text="Access rules names: " VerticalAlignment="Center" />
+                                <TextBlock FontSize="16" Foreground="MidnightBlue" Text="{Binding CurrentRolesNames}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+        <DataGrid Name="RolesDataGrid" ItemsSource="{Binding Source=Roles}" AutoGenerateColumns="False" Margin="10,41,10,40" Grid.Column="1" Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="1*" Header="Role ID" Binding="{Binding RoleID}"/>
+                <DataGridTextColumn Width="1*" Header="Role name" Binding="{Binding RoleName}"/>
+                <DataGridTextColumn Width="1*"  Header="Access levels" Binding="{Binding AccessLevels}"/>
+            </DataGrid.Columns>
+
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="0" Background="BlanchedAlmond" Padding="10">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="12" Text="Role name: " VerticalAlignment="Center" />
+                                <TextBlock FontSize="16" Foreground="MidnightBlue" Text="{Binding RoleName}" VerticalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="12" Text="Access rules names: " VerticalAlignment="Center" />
+                                <TextBlock FontSize="16" Foreground="MidnightBlue" Text="{Binding AccessLevelsNames}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+        <DataGrid Name="RulesDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding Source=Rules}" Margin="10,41,10,40" Grid.Column="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="1*" Header="AccessID" Binding="{Binding AccessID}"/>
+                <DataGridTextColumn Width="1*"  Header="AccessName" Binding="{Binding AccessName}"/>
+            </DataGrid.Columns>
+
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="0" Background="BlanchedAlmond" Padding="10">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="12" Text="Access value: " VerticalAlignment="Center" />
+                                <TextBlock FontSize="16" Foreground="MidnightBlue" Text="{Binding AccessID}" VerticalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="12" Text="Rule name: " VerticalAlignment="Center" />
+                                <TextBlock FontSize="16" Foreground="MidnightBlue" Text="{Binding AccessName}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+        <Button  Content="Add"  Click="AddRoleClick" Margin="10,0,0,10" HorizontalAlignment="Left" Width="60" Height="25" VerticalAlignment="Bottom" Grid.Row="1" Grid.Column="1" />
+        <Button  Content="Add"  Click="AddRuleClick" Margin="10,0,0,10" HorizontalAlignment="Left" Width="60" Height="25" VerticalAlignment="Bottom" Grid.Column="1" />
+        <Button  Content="Delete"  Click="DeleteRoleClick" Margin="75,0,0,10" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="60" Grid.Row="1" Grid.Column="1" />
+        <Button  Content="Delete"  Click="DeleteRuleClick" Margin="75,0,0,10" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="60" Grid.Column="1" />
+        <Label Content="Rules" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Roles" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label Content="Users" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="2"/>
     </Grid>
 </Window>
